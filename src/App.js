@@ -12,14 +12,18 @@ class App extends Component {
       user: '',
       states: [{
                 name: 'Ohio',
-                cities: ['Cleveland','Columbus','Cincinnatti'],
-              },
-              {
-                name: 'California',
-                cities: ['Los Angeles','San Diego','San Francisco','Sacramento'],
-              }],
+                cities: [{name: 'Columbus',
+                          poi: [{name: 'Columbus Idea Foundry',
+                                address: '421 W State St',
+                                category: 'hobby',
+                                about: 'Our Idea Foundry is both a physical place – 60,000 sq ft of workshops and offices; working nooks, classrooms and communal spaces – and a state of mind; the belief that each of us has the potential to bring our ideas to life if given the space, the equipment and the support to empower our inner maker.',
+                                inItinerary: false
+                              }]
+                              }],
+                }],
       trips: [],
       currentState: '',
+      currentCity: '',
     }
 
   }
@@ -87,6 +91,13 @@ class App extends Component {
     })
   }
 
+  setCurrentCity = city => {
+    this.setState({
+      ...this.state,
+      currentCity: city,
+    })
+  }
+
 
   render() {
 
@@ -97,6 +108,8 @@ class App extends Component {
         states={this.state.states}
         currentState={this.state.currentState}
         setCurrentState = {this.setCurrentState}
+        currentCity={this.state.currentCity}
+        setCurrentCity={this.setCurrentCity}
         />
     );
   }

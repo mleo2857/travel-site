@@ -20,7 +20,7 @@ const UserPage = props => {
           <p
               className="lead"
             >
-              "Why don't you start planning one?"
+              Why don't you start planning one?
             </p>
           <Link
             className="btn btn-primary btn-lg"

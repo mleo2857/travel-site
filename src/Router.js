@@ -7,6 +7,7 @@ import UserPage from './components/UserPage';
 import StateSelect from './components/StateSelect';
 import Navbar from './components/Navbar';
 import CitySelect from './components/CitySelect';
+import CityPage from './components/CityPage';
 
 const Router = ({
   addTrip,
@@ -14,10 +15,15 @@ const Router = ({
   states,
   currentState,
   setCurrentState,
+  currentCity,
+  setCurrentCity,
 }) => (
   <BrowserRouter>
     <div>
-      <Navbar />
+      <Navbar
+        currentState={currentState}
+        setCurrentState={setCurrentState}
+      />
 
       <Route
         name="Homepage"
@@ -50,12 +56,25 @@ const Router = ({
           <CitySelect
             states={states}
             currentState={currentState}
+            setCurrentCity={setCurrentCity}
             {...props}
           />
         )}
       />
 
-
+      <Route
+        name="cityPage"
+        path="/cityPage"
+        render={props => (
+          <CityPage
+            states={states}
+            currentState={currentState}
+            currentCity={currentCity}
+            setCurrentCity={setCurrentCity}
+            {...props}
+          />
+        )}
+      />
 
     </div>
   </BrowserRouter>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => (
+const Navbar = props => (
   <nav
     className="navbar navbar-expand navbar-dark bg-dark"
   >
@@ -10,6 +10,7 @@ const Navbar = () => (
     >
       <Link
         className="navbar-brand"
+        onClick={(e) => props.setCurrentState('')}
         to="/"
       >
       Home

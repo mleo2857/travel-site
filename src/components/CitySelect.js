@@ -9,7 +9,14 @@ const CitySelect = props => {
         <ul>
           {props.states.filter(state => state.name === props.currentState).map(state =>
             state.cities.map(city =>
-              <li>{city}</li>
+              <li>
+                <Link
+                className="btn btn-primary btn-lg"
+                to="/cityPage"
+                onClick={(e) => props.setCurrentCity(city.name)}
+                >{city.name}
+                </Link>
+              </li>
             )
           )}
         </ul>
