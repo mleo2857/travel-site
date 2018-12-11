@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './css/App.css';
 import Router from './Router';
 
-var Autocomplete = require('google-places-browser/autocomplete')
-var Places = require('google-places-browser/places')
+import PlacesService from './services/PlacesService';
 
 class App extends Component {
   constructor(props){
@@ -22,53 +21,43 @@ class App extends Component {
       currentState: '',
     }
 
+    this.placesService = new PlacesService();
+
   }
 
-  // componentDidMount() {
-  //   fetch('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&key=AIzaSyBTaTb9XC32HJvYERRueOxEB97vpVL3ESE',
-  //   {
-  //     mode: 'no-cors',
-  //   })
-  //   .then(function(results) {
-  //     return results.json();
-  //   }).then(function(myJson) {
-  //     console.log(JSON.stringify(myJson));
-  //   })
-  // }
+  async componentDidMount() {
+    const placesSearch = await this.placesService.search(); 
 
+    console.log(placesSearch);
 
+    // var map;
+    // var service;
+    // var infowindow;
 
+    // // var mapCenter = new window.google.maps.LatLng(-33.8617374,151.2021291);
 
-
-
-  // async componentDidMount() {
-  //
-  //   var autocomplete = Autocomplete(window.google)
-  //   var places = Places(window.google)
-  //
-  //   autocomplete.places({input: 'San Francisco'}, function (err, results) {
-  //     //=> handle err/result array
-  //     console.log(err);
-  //     console.log(results);
-  //   })
-  //
-  //   places.details({placeId: 'id'}, function (err, place) {
-  //     //=> handle err/place
-  //     console.log(err);
-  //     console.log(results);
-  //   })
-  //
-  //
-  //
-  //   // const apiCall = await fetch('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&key=AIzaSyApBhUsIjHLZooUYepjQDoKAbzmPG6uV4g',
-  //   // {
-  //   //   mode: 'no-cors',
-  //   // })
-  //   //
-  //   // const apiCallJSON = await apiCall.text();
-  //   //
-  //   // console.log(apiCallJSON);
-  // }
+    // map = new window.google.maps.Map(document.getElementById('map'), {
+    //   // center: mapCenter,
+    //   zoom: 15
+    // });
+  
+    // var request = {
+    //   query: 'Museum of Contemporary Art Australia',
+    //   fields: ['photos', 'formatted_address', 'name', 'rating', 'opening_hours', 'geometry'],
+    // };
+  
+    // service = new window.google.maps.places.PlacesService(map);
+    // service.findPlaceFromQuery(request, callback);
+  
+    // function callback(results, status) {
+    //   if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+    //     for (var i = 0; i < results.length; i++) {
+    //       console.log(results[i]);
+    //       // createMarker(results[i]);
+    //     }
+    //   }
+    // }
+  }
 
 
   addTrip = () => {
@@ -97,7 +86,7 @@ class App extends Component {
         states={this.state.states}
         currentState={this.state.currentState}
         setCurrentState = {this.setCurrentState}
-        />
+      />
     );
   }
 }
