@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.jpeg';
 import './css/App.css';
 import Router from './Router';
 
@@ -11,8 +10,18 @@ class App extends Component {
     super(props);
     this.state = {
       user: '',
+      states: [{
+                name: 'Ohio',
+                cities: ['Cleveland','Columbus','Cincinnatti'],
+              },
+              {
+                name: 'California',
+                cities: ['Los Angeles','San Diego','San Francisco','Sacramento'],
+              }],
       trips: [],
+      currentState: '',
     }
+
   }
 
   // componentDidMount() {
@@ -32,34 +41,34 @@ class App extends Component {
 
 
 
-  async componentDidMount() {
-
-    var autocomplete = Autocomplete(window.google)
-    var places = Places(window.google)
-
-    autocomplete.places({input: 'San Francisco'}, function (err, results) {
-      //=> handle err/result array
-      console.log(err);
-      console.log(results);
-    })
-
-    places.details({placeId: 'id'}, function (err, place) {
-      //=> handle err/place
-      console.log(err);
-      console.log(results);
-    })
-
-
-
-    // const apiCall = await fetch('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&key=AIzaSyApBhUsIjHLZooUYepjQDoKAbzmPG6uV4g',
-    // {
-    //   mode: 'no-cors',
-    // })
-    //
-    // const apiCallJSON = await apiCall.text();
-    //
-    // console.log(apiCallJSON);
-  }
+  // async componentDidMount() {
+  //
+  //   var autocomplete = Autocomplete(window.google)
+  //   var places = Places(window.google)
+  //
+  //   autocomplete.places({input: 'San Francisco'}, function (err, results) {
+  //     //=> handle err/result array
+  //     console.log(err);
+  //     console.log(results);
+  //   })
+  //
+  //   places.details({placeId: 'id'}, function (err, place) {
+  //     //=> handle err/place
+  //     console.log(err);
+  //     console.log(results);
+  //   })
+  //
+  //
+  //
+  //   // const apiCall = await fetch('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&key=AIzaSyApBhUsIjHLZooUYepjQDoKAbzmPG6uV4g',
+  //   // {
+  //   //   mode: 'no-cors',
+  //   // })
+  //   //
+  //   // const apiCallJSON = await apiCall.text();
+  //   //
+  //   // console.log(apiCallJSON);
+  // }
 
 
   addTrip = () => {
@@ -71,6 +80,13 @@ class App extends Component {
     })
   }
 
+  setCurrentState = state => {
+    this.setState({
+      ...this.state,
+      currentState: state,
+    })
+  }
+
 
   render() {
 
@@ -78,6 +94,9 @@ class App extends Component {
       <Router
         addTrip={this.addTrip}
         trips={this.state.trips}
+        states={this.state.states}
+        currentState={this.state.currentState}
+        setCurrentState = {this.setCurrentState}
         />
     );
   }
