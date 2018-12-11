@@ -3,11 +3,13 @@ import {
   BrowserRouter,
   Route,
 } from 'react-router-dom';
+
 import UserPage from './components/UserPage';
 import StateSelect from './components/StateSelect';
 import Navbar from './components/Navbar';
 import CitySelect from './components/CitySelect';
 import CityPage from './components/CityPage';
+import PlacesSearch from './components/PlacesSearch';
 
 const Router = ({
   addTrip,
@@ -76,6 +78,11 @@ const Router = ({
         )}
       />
 
+      <Route
+        name="placesSearch"
+        path="/places-search"
+        component={PlacesSearch}
+      />
     </div>
   </BrowserRouter>
 );
